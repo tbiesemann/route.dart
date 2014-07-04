@@ -46,11 +46,10 @@ class DefaultWindowClickHandler {
     }
     
     while (el != null && el is! AnchorElement) {
-      el = el.parent;
-      if(el == null){ //Maybe shadowDOM border
-        if(el.parentNode != null && el.parentNode is ShadowRoot){
-          el = el.parentNode.host;
-        }
+      if(el.parent != null){
+        el = el.parent;
+      } else if(el.parentNode != null && el.parentNode is ShadowRoot){  //Maybe shadowDOM border
+        el = el.parentNode.host;
       }
     };
     if (el == null) return;
