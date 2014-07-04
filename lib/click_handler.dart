@@ -39,7 +39,7 @@ class DefaultWindowClickHandler {
 
   void call(Event e) {
     Element el;
-    if(el.path != null && el.path.length > 0){
+    if(e.path != null && e.path.length > 0){
     el = e.path[0];
     } else {
       el = e.target;
