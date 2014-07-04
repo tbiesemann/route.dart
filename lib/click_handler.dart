@@ -38,9 +38,20 @@ class DefaultWindowClickHandler {
                      this._normalizer);
 
   void call(Event e) {
-    Element el = e.target;
+    Element el;
+    if(el.path != null && el.path.length > 0){
+    el = e.path[0];
+    } else {
+      el = e.target;
+    }
+    
     while (el != null && el is! AnchorElement) {
       el = el.parent;
+      if(el == null){ //Maybe shadowDOM border
+        if(el.parentNode != null && el.parentNode is ShadowRoot){
+          el = el.parentNode.host;
+        }
+      }
     };
     if (el == null) return;
     assert(el is AnchorElement);
